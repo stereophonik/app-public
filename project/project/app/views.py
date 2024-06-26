@@ -38,4 +38,18 @@ def outcome_list(request):
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
-    
+
+@csrf_exempt
+def outcome_detail(request, pk):
+    try:
+        outcome = Outcome.objects.get(pk=pk)
+    except Outcome.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = OutcomeSerializer(outcome)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'DELETE':
+        outcome.delete()
+        return HttpResponse(status=204)
