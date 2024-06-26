@@ -15,10 +15,10 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
-class OutcomeSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    datetime = serializers.DateTimeField(read_only=True)
-    integer = serializers.IntegerField()
+class OutcomeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Outcome
+        fields = ['id', 'datetime', 'integer']
 
     def produce(self, data):
         return Outcome.objects.create(**data)
