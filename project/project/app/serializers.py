@@ -14,6 +14,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ['url', 'name']
 
+
 class OutcomeSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     datetime = serializers.DateTimeField(read_only=True)
